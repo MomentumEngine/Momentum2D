@@ -19,6 +19,6 @@ add_subdirectory(vendor/spdlog/)
 include_directories(vendor/glfw/include/
 /include)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_subdirectory(src/)
 
 target_link_libraries(${PROJECT_NAME} glad glfw box2d glm spdlog)
