@@ -1,4 +1,8 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.7...3.20)
+
+if(${CMAKE_VERSION} VERSION_LESS 3.12)
+    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+endif()
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -16,9 +20,10 @@ add_subdirectory(vendor/box2d/)
 add_subdirectory(vendor/glm/)
 add_subdirectory(vendor/spdlog/)
 
+add_subdirectory(src/)
+
 include_directories(vendor/glfw/include/
 /include)
 
-add_subdirectory(src/)
 
 target_link_libraries(${PROJECT_NAME} glad glfw box2d glm spdlog)
