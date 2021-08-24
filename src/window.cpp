@@ -1,9 +1,7 @@
 #include "window.h"
 
 GLFW::Window::Window(int width, int height, const char* title):m_Width(width), m_Height(height), m_Title(title){
-    initGLFW();
-    setWindow();
-    initGlad();
+    InitWindow();
     }
 
 GLFW::Window::~Window(){
@@ -11,18 +9,12 @@ GLFW::Window::~Window(){
     glfwTerminate();
 }
 
-void GLFW::Window::initGLFW()
-{
-    if(!glfwInit())
-    {
-        std::cout << "Failed to intialize GLFW" << std::endl;
-        glfwTerminate();
-    }
 
-}
-
-void GLFW::Window::setWindow()
+void GLFW::Window::InitWindow()
 {
+    if (!glfwInit())
+        throw std::runtime_error("Failed to initialize GLFW");
+
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -36,15 +28,14 @@ void GLFW::Window::setWindow()
 
     glfwMakeContextCurrent(m_Window);
     glfwSetWindowUserPointer(m_Window, this);
-}
-void GLFW::Window::initGlad()
-{
+
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         throw std::runtime_error("Failed to initialize glad");
 
-    glViewport(0, 0, 800, 600);
+    glViewport(0, 0, m_Width, m_Height);
 }
-void GLFW::Window::update()
+
+void GLFW::Window::Update()
 {
     glClearColor(0.5f, 0.8f, 0.9f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -53,3 +44,7 @@ void GLFW::Window::update()
     glfwPollEvents();
 }
 
+bool GLFW::Window::ShouldClose()
+{
+    return glfwWindowShouldClose(m_Window);
+}

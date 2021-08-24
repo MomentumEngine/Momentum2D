@@ -10,19 +10,18 @@ namespace GLFW
 {
     class Window {
     public:
+        Window(int width, int height, const char* title);
+        ~Window();
+        void Update();
+        bool ShouldClose();
+
+    private:
         const char* m_Title;
         int m_Width;
         int m_Height;
         GLFWwindow* m_Window;
 
-        Window(int width, int height, const char* title);
-        ~Window();
-        void update();
-
-    private:
-        void initGLFW();
-        void setWindow();
-        void initGlad();
+        void InitWindow();
     };
 
 }

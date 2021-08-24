@@ -7,10 +7,10 @@
 
 int main()
 {
-    GLFW::Window window(800, 600, "Momentum 2D");
+    GLFW::Window window(1280, 720, "Momentum 2D");
 
-    while (!glfwWindowShouldClose(window.m_Window))
-        window.update();
+    while (!window.ShouldClose())
+        window.Update();
 
 	return 0;
 }
