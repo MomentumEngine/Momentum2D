@@ -13,7 +13,7 @@ namespace GLFW
         Window(int width, int height, const char* title);
         ~Window();
         void Update();
-        bool ShouldClose();
+        int ShouldClose();
 
     private:
         const char* m_Title;
