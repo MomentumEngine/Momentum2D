@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <imgui.h>
 
 #include <iostream>
 
@@ -9,8 +10,6 @@ int main()
 {
     GLFW::Window window(1280, 720, "Momentum 2D");
 
-    while (!window.ShouldClose())
+    while(!window.ShouldClose())
         window.Update();
-
-	return 0;
 }

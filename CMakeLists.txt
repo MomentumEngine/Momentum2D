@@ -19,6 +19,11 @@ add_compile_options(-Wall -Wextra -Wpedantic -O3 -fsanitize=address -fsanitize=u
 add_link_options(-Wall -Wextra -Wpedantic -O3 -fsanitize=address -fsanitize=undefined)
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
+set(IMGUI_PATH "vendor/imgui")
+file(GLOB IMGUI_SOURCES ${IMGUI_PATH}/*.cpp)
+add_library("ImGui" STATIC ${IMGUI_SOURCES})
+target_include_directories("ImGui" PUBLIC ${IMGUI_PATH})
+
 add_subdirectory(vendor/glad/)
 add_subdirectory(vendor/glfw/)
 add_subdirectory(vendor/openal-soft/)
@@ -32,4 +37,4 @@ include_directories(vendor/glfw/include/
 /include)
 
 
-target_link_libraries(${PROJECT_NAME} glad glfw box2d glm spdlog OpenAL)
+target_link_libraries(${PROJECT_NAME} glad glfw box2d glm spdlog OpenAL ImGui)
