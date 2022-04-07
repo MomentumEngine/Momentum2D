@@ -14,12 +14,12 @@ namespace GLFW
         ~Window();
         void Update();
         int ShouldClose();
+        GLFWwindow* m_Window;
 
     private:
         const char* m_Title;
         int m_Width;
         int m_Height;
-        GLFWwindow* m_Window;
 
         void InitWindow();
     };
