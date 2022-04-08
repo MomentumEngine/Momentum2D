@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7...3.20)
+cmake_minimum_required(VERSION 3.10...3.23)
 
 if(${CMAKE_VERSION} VERSION_LESS 3.12)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
@@ -19,9 +19,23 @@ add_link_options(-Wall -Wextra -Wpedantic -O3 -fsanitize=address -fsanitize=unde
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
 set(IMGUI_PATH "vendor/imgui")
-file(GLOB IMGUI_SOURCES ${IMGUI_PATH}/*.cpp)
-add_library("ImGui" STATIC ${IMGUI_SOURCES})
-target_include_directories("ImGui" PUBLIC ${IMGUI_PATH})
+add_library("ImGui" STATIC)
+target_sources(ImGui
+                PRIVATE
+                    ${IMGUI_PATH}/imgui_demo.cpp
+                    ${IMGUI_PATH}/imgui_draw.cpp
+                    ${IMGUI_PATH}/imgui_tables.cpp
+                    ${IMGUI_PATH}/imgui_widgets.cpp
+                    ${IMGUI_PATH}/imgui.cpp
+
+                PRIVATE
+                    ${IMGUI_PATH}/backends/imgui_impl_opengl3.cpp
+                    ${IMGUI_PATH}/backends/imgui_impl_glfw.cpp
+                )
+target_include_directories( ImGui
+                    PUBLIC ${IMGUI_PATH}
+                    PUBLIC ${IMGUI_PATH}/backends                  
+                )
 
 add_subdirectory(vendor/glad/)
 add_subdirectory(vendor/glfw/)
@@ -34,6 +48,5 @@ add_subdirectory(src/)
 
 include_directories(vendor/glfw/include/
 /include)
-
 
 target_link_libraries(${PROJECT_NAME} glad glfw box2d glm spdlog OpenAL ImGui)
