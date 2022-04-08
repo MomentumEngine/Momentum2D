@@ -23,6 +23,12 @@ int main()
 		return 1;
 
 	glfwMakeContextCurrent(window);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+	    std::cout << "Error: Could not initialize GLAD" << std::endl;
+	    return 1;
+	}
+
 	glfwSwapInterval(1);			//enable vsync
 	
 	IMGUI_CHECKVERSION();
