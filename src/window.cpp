@@ -33,6 +33,9 @@ void GLFW::Window::InitWindow()
         throw std::runtime_error("Failed to initialize glad");
 
     glViewport(0, 0, m_Width, m_Height);
+    
+    //Vsync
+    glfwSwapInterval(1);
 }
 
 void GLFW::Window::Update()
