@@ -1,0 +1,2 @@
+vendor/glad/* linguist-generated
+src/stb_image.h linguist-vendored
