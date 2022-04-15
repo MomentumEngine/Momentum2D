@@ -61,6 +61,7 @@ int main()
 			static int counter = 0;
 
 			ImGui::Begin("Hello World");
+			ImGui::End();
 		}
 
 		ImGui::Render();
