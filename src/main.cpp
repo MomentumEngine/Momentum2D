@@ -62,7 +62,6 @@ int main()
 
 			ImGui::Begin("Hello World");
 			ImGui::End();
-
 		}
 
 		ImGui::Render();
