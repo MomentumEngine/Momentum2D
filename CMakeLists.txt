@@ -30,8 +30,10 @@ target_sources(ImGui
 
                 PRIVATE
                     ${IMGUI_PATH}/backends/imgui_impl_opengl3.cpp
+                    ${IMGUI_PATH}/backends/imgui_impl_vulkan.cpp
                     ${IMGUI_PATH}/backends/imgui_impl_glfw.cpp
                 )
+
 target_include_directories( ImGui
                     PUBLIC ${IMGUI_PATH}
                     PUBLIC ${IMGUI_PATH}/backends                  
